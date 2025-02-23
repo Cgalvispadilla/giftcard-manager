@@ -73,6 +73,16 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
 
+se debe agregar en el archivo pom.xml la siguiente dependencia
+
+```xml
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
 Ademas, debe tener instalado docker para generar la imagen de la siguiente manera
 
 ```bash
