@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "5d6d23a5-99b6-42a4-9cab-f6d5d04f67bb",
+		"name": "GiftCard Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42376939"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"var token = jsonData.data.token;\r",
+							"\r",
+							"pm.environment.set(\"token\", token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userName\": \"cgalvis\",\n  \"password\": \"12345678CGp*&\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "Generated from cURL: \ncurl -X POST http://localhost:8080/api/auth/register \\\n-H \"Content-Type: application/json\" \\\n-d '{\n  \"userName\": \"cgalvis\",\n  \"password\": \"12345\"\n}'\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"var token = jsonData.data.token;\r",
+							"\r",
+							"pm.environment.set(\"token\", token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"cgalvis\",\r\n  \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/auth/login \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"userName\": \"cgalvis\",\r\n  \"password\": \"12345\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create GiftCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"QWRASA2\",\r\n    \"amount\": 999999,\r\n    \"emailTo\": \"carlosgalvispadilla@gmail.com\",\r\n    \"expirationDate\": \"2025-12-22T00:00:00.000Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/giftcards \\\r\n-H \"Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjZ2FsdmlzIiwiaWF0IjoxNzQwMjUwOTE3LCJleHAiOjE3NDAyNTQ1MTd9.cT4Y_NegLrv7yWQg5S7zzyO6iHN0GywnIm2_wcrD_lc\" \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"code\": \"\",\r\n  \"amount\": 0,\r\n  \"expirationDate\": \"\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Find GiftCard By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards",
+						"{{id}}"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:8080/api/giftcards/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Find all GiftCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:8080/api/giftcards"
+			},
+			"response": []
+		},
+		{
+			"name": "Update GiftCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 9999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://localhost:8080/api/giftcards/{{id}} \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"code\": \"\",\r\n  \"amount\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete GiftCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE http://localhost:8080/api/giftcards/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Redimir GiftCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/giftcards/1/redeem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"giftcards",
+						"1",
+						"redeem"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:8080/api/giftcards/{{id}}"
+			},
+			"response": []
+		}
+	]
+}
